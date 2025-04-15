@@ -21,26 +21,24 @@ export default function FishFarming() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
+
     try {
-      // Simulating API call
-      setTimeout(() => {
-        const fishTypes = ['Tilapia', 'Catfish', 'Carp', 'Trout', 'Bass'];
-        const recommendedFish = fishTypes[Math.floor(Math.random() * fishTypes.length)];
-        setResult(recommendedFish);
-        setLoading(false);
-      }, 1500);
-      
-      // Actual API call would look like:
-      // const response = await fetch('/api/fish-recommendation', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData)
-      // });
-      // const data = await response.json();
-      // setResult(data.fish);
+      const response = await fetch('http://localhost:8000/predict/fish', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ph: parseFloat(formData.ph),
+          temperature: parseFloat(formData.temperature),
+          turbidity: parseFloat(formData.turbidity)
+        })
+      });
+
+      const data = await response.json();
+      setResult(data.prediction);
     } catch (error) {
       console.error('Error submitting data:', error);
+      setResult('Error fetching recommendation');
+    } finally {
       setLoading(false);
     }
   };
@@ -50,10 +48,11 @@ export default function FishFarming() {
       <h2 className="text-2xl font-bold text-blue-700 mb-6">Fish Farming Recommendation</h2>
       <p className="mb-4 text-gray-900">Enter water parameters to get fish type recommendations for optimal farming.</p>
       
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium  text-gray-900 mb-1">pH Level</label>
+            <label className="block text-sm font-medium text-gray-900 mb-1">pH Level</label>
             <input
               type="number"
               name="ph"
@@ -68,7 +67,7 @@ export default function FishFarming() {
           </div>
           
           <div>
-            <label className="block text-sm font-medium  text-gray-900 mb-1">Water Temperature (°C)</label>
+            <label className="block text-sm font-medium text-gray-900 mb-1">Water Temperature (°C)</label>
             <input
               type="number"
               name="temperature"
@@ -83,7 +82,7 @@ export default function FishFarming() {
           </div>
           
           <div>
-            <label className="block text-sm font-medium  text-gray-900 mb-1">Turbidity (NTU)</label>
+            <label className="block text-sm font-medium text-gray-900 mb-1">Turbidity (NTU)</label>
             <input
               type="number"
               name="turbidity"
@@ -111,7 +110,7 @@ export default function FishFarming() {
       {result && (
         <div className="mt-8 p-4 bg-blue-100 border border-blue-300 rounded-md">
           <h3 className="text-xl font-medium text-blue-800">Recommendation Result</h3>
-          <p className="mt-2 text-lg">Based on your water parameters, we recommend raising: <span className="font-bold text-blue-700">{result}</span></p>
+          <p className="mt-2 text-lg text-gray-800">Based on your water parameters, we recommend raising: <span className="font-bold text-blue-700">{result}</span></p>
         </div>
       )}
     </div>

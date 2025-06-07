@@ -37,7 +37,7 @@ export default function Home() {
             {/* Logo */}
             <div className="flex items-center space-x-2">
               <span className="text-2xl">🌱</span>
-              <span className="text-xl font-bold text-green-700">AgriAssist</span>
+              <span className="text-xl font-bold text-green-700">SmartNexus</span>
             </div>
 
             {/* Desktop Navigation */}
@@ -51,12 +51,7 @@ export default function Home() {
               <Link href="#contact" className="text-gray-700 hover:text-green-600 transition-colors">
                 Contact
               </Link>
-              <Link 
-                href="/admin" 
-                className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors font-medium"
-              >
-                Login as Admin
-              </Link>
+            
             </div>
 
             {/* Mobile Menu Button */}
@@ -168,9 +163,9 @@ export default function Home() {
       {/* About Section */}
       <section id="about" className="py-16 px-6">
         <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-4xl font-bold text-gray-800 mb-6">About AgriAssist</h2>
+          <h2 className="text-4xl font-bold text-gray-800 mb-6">About SmartNexus</h2>
           <p className="text-lg text-gray-600 leading-relaxed">
-            AgriAssist combines cutting-edge AI technology with agricultural expertise to provide 
+            SmartNexus combines cutting-edge AI technology with agricultural expertise to provide 
             farmers with intelligent solutions for crop management, aquaculture, and pest control. 
             Our mission is to make farming more efficient, sustainable, and profitable through 
             data-driven insights and recommendations.
@@ -182,7 +177,7 @@ export default function Home() {
       <section className="py-16 px-6 bg-gradient-to-r from-green-600 to-blue-600 text-white">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-4xl font-bold mb-6">Ready to Transform Your Farm?</h2>
-          <p className="text-xl mb-8">Join thousands of farmers who trust AgriAssist for their agricultural needs.</p>
+          <p className="text-xl mb-8">Join thousands of farmers who trust SmartNexus for their agricultural needs.</p>
           <Link 
             href="/dashboard" 
             className="bg-white text-green-600 px-8 py-4 rounded-lg text-lg font-medium hover:bg-gray-100 transition-colors shadow-lg inline-block"
@@ -199,7 +194,7 @@ export default function Home() {
             <div>
               <div className="flex items-center space-x-2 mb-4">
                 <span className="text-2xl">🌱</span>
-                <span className="text-xl font-bold">AgriAssist</span>
+                <span className="text-xl font-bold">SmartNexus</span>
               </div>
               <p className="text-gray-400">
                 Empowering farmers with AI-driven agricultural solutions.
@@ -224,14 +219,14 @@ export default function Home() {
             <div>
               <h4 className="font-bold mb-4">Contact</h4>
               <div className="space-y-2 text-gray-400">
-                <p>Email: info@agriassist.com</p>
+                <p>Email: info@SmartNexus.com</p>
                 <p>Phone: +1 (555) 123-4567</p>
                 <p>Address: 123 Farm St, Agriculture City</p>
               </div>
             </div>
           </div>
           <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
-            <p>© {new Date().getFullYear()} AgriAssist. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} SmartNexus. All rights reserved.</p>
           </div>
         </div>
       </footer>

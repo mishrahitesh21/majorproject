@@ -60,43 +60,7 @@ export default function Dashboard() {
         </div>
 
         {/* Fish Model Version Selection - Show only when Fish tab is active */}
-        {activeTab === 'fish' && (
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-            <div className="flex items-center gap-4">
-              <label className="font-medium text-gray-700">Model Version:</label>
-              <div className="flex gap-4">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="fishModel"
-                    value="v1"
-                    checked={fishModelVersion === 'v1'}
-                    onChange={(e) => setFishModelVersion(e.target.value)}
-                    className="text-blue-600 focus:ring-blue-500"
-                  />
-                  <span className="text-gray-700">Version 1 (Standard)</span>
-                </label>
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="fishModel"
-                    value="v2"
-                    checked={fishModelVersion === 'v2'}
-                    onChange={(e) => setFishModelVersion(e.target.value)}
-                    className="text-blue-600 focus:ring-blue-500"
-                  />
-                  <span className="text-gray-700">Version 2 (Advanced)</span>
-                </label>
-              </div>
-            </div>
-            <p className="text-sm text-gray-600 mt-2">
-              {fishModelVersion === 'v1' 
-                ? 'Standard model - Good for general fish farming recommendations'
-                : 'Advanced model - Improved accuracy with enhanced features'
-              }
-            </p>
-          </div>
-        )}
+        {activeTab === 'fish'}
 
         {/* Content Area */}
         <div className="bg-white rounded-lg shadow-md p-6">

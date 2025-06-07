@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 
-export default function FishFarming({ modelVersion = 'v1' }) {
+export default function FishFarming() {
   const [formData, setFormData] = useState({
     ph: '',
     temperature: '',
@@ -19,7 +19,6 @@ export default function FishFarming({ modelVersion = 'v1' }) {
       ...prev,
       [name]: value
     }));
-    // Clear error when user starts typing
     if (error) setError('');
   };
 
@@ -66,13 +65,10 @@ export default function FishFarming({ modelVersion = 'v1' }) {
       const requestData = {
         ph: parseFloat(formData.ph),
         temperature: parseFloat(formData.temperature),
-        turbidity: parseFloat(formData.turbidity),
-        model_version: modelVersion
+        turbidity: parseFloat(formData.turbidity)
       };
 
-      console.log('Sending fish prediction request:', requestData);
-
-      const response = await fetch('http://localhost:8000/predict/fish', {
+      const response = await fetch('http://localhost:8083/predict/fish', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -88,7 +84,6 @@ export default function FishFarming({ modelVersion = 'v1' }) {
       const result = await response.json();
       setPrediction(result.prediction);
     } catch (err) {
-      console.error('Fish prediction error:', err);
       setError(err.message || 'Failed to get fish recommendation. Please try again.');
     } finally {
       setLoading(false);
@@ -105,7 +100,6 @@ export default function FishFarming({ modelVersion = 'v1' }) {
     setError('');
   };
 
-  // Fish information for educational purposes
   const fishInfo = {
     rohu: "Rohu - A popular freshwater fish, ideal for polyculture systems",
     tilapia: "Tilapia - Hardy fish that grows quickly in warm water",
@@ -119,10 +113,7 @@ export default function FishFarming({ modelVersion = 'v1' }) {
       <div className="text-center">
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Fish Farming Recommendation</h2>
         <p className="text-gray-800 text-lg">
-          Get fish species recommendations based on water conditions 
-          <span className="ml-2 px-3 py-1 bg-blue-600 text-white rounded text-sm font-medium">
-            Using Model {modelVersion.toUpperCase()}
-          </span>
+          Get fish species recommendations based on water conditions
         </p>
       </div>
 
@@ -233,12 +224,7 @@ export default function FishFarming({ modelVersion = 'v1' }) {
           </div>
           
           <div className="bg-white rounded-md p-4 border border-green-200">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-2xl font-bold text-green-700 capitalize">{prediction}</span>
-              <span className="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded">
-                Model {modelVersion.toUpperCase()}
-              </span>
-            </div>
+            <span className="text-2xl font-bold text-green-700 capitalize block mb-2">{prediction}</span>
             <p className="text-gray-800 font-medium">
               {fishInfo[prediction.toLowerCase()] || "Suitable fish species for your water conditions"}
             </p>
@@ -260,23 +246,6 @@ export default function FishFarming({ modelVersion = 'v1' }) {
           </div>
         </div>
       )}
-
-      {/* Model Version Info */}
-      <div className="bg-gray-100 border border-gray-300 rounded-lg p-4">
-        <h4 className="font-bold text-gray-900 mb-2">Model Information</h4>
-        <div className="text-sm text-gray-800">
-          <p className="mb-1">
-            <span className="font-bold">Current Model:</span> 
-            <span className="ml-2 text-blue-700 font-semibold">{modelVersion.toUpperCase()}</span>
-          </p>
-          <p className="font-medium">
-            {modelVersion === 'v1' 
-              ? 'Standard decision tree model with basic water parameter analysis'
-              : 'Advanced decision tree model with enhanced feature processing and improved accuracy'
-            }
-          </p>
-        </div>
-      </div>
     </div>
   );
 }
